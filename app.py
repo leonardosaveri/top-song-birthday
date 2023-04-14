@@ -29,9 +29,6 @@ st.markdown("Choose a birth date, and the app will fetch the first song that was
 date = st.date_input("Select your birth date", datetime.datetime(2000, 1, 1), min_value=datetime.datetime(1900, 1, 1), max_value=datetime.date.today()).strftime('%Y-%m-%d')
 
 if st.button('Get Songs'):
-    if not songs: 
-        st.markdown("No songs found for this birthday.") 
-    else: 
         songs = get_first_each_year(date)
         st.write("Here are the first songs that were at the top of the charts on your birthday each year:") 
         for date, song in songs.items(): st.write(datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%Y') + ': ' + song)
