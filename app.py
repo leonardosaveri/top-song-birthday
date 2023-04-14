@@ -7,7 +7,7 @@ def get_dates_from_date_till_now(start_date_str):
     start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date() 
     today = datetime.date.today() 
     dates = [date.strftime('%Y-%m-%d') for date in rrule(YEARLY, dtstart=start_date, until=today)]
-    dates = [date if date >= "1958-08-04"]
+    dates = [date if date >= "1958-08-04" for date in dates]
     return dates
 
 @st.cache_data 
