@@ -6,7 +6,8 @@ from dateutil.rrule import rrule, YEARLY
 def get_dates_from_date_till_now(start_date_str): 
     start_date = datetime.datetime.strptime(start_date_str, '%Y-%m-%d').date() 
     today = datetime.date.today() 
-    dates = [date.strftime('%Y-%m-%d') for date in rrule(YEARLY, dtstart=start_date, until=today)] 
+    dates = [date.strftime('%Y-%m-%d') for date in rrule(YEARLY, dtstart=start_date, until=today)]
+    dates = [date if date >= "1958-08-04"]
     return dates
 
 @st.cache_data 
@@ -30,5 +31,6 @@ date = st.date_input("Select your birth date", datetime.datetime(2000, 1, 1), mi
 
 if st.button('Get Songs'):
         songs = get_first_each_year(date)
+        st.empty()
         st.write("Here are the first songs that were at the top of the charts on your birthday each year:") 
         for date, song in songs.items(): st.write(datetime.datetime.strptime(date, '%Y-%m-%d').strftime('%Y') + ': ' + song)
